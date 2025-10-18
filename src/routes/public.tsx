@@ -11,7 +11,7 @@ export const publicRoutes = ({
     element: !isAuthenticated ? (
       <Login />
     ) : (
-      <Navigate to="/dahsboard" replace />
+      <Navigate to="/dashboard" replace />
     ),
   },
 ];

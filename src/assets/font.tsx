@@ -1,0 +1,7 @@
+import "@fontsource/poppins/400.css";
+import "@fontsource/poppins/600.css";
+import "@fontsource/poppins/700.css";
+
+export const poppins = {
+  className: "font-poppins",
+};
