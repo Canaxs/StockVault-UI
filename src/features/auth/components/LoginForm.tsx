@@ -14,9 +14,9 @@ export const LoginForm = () => {
 
   return (
     <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg mx-auto mt-10 p-6 sm:p-8 md:p-10 shadow-2xl rounded-xl bg-white/80 backdrop-blur-sm border border-gray-200/50">
-      <div className="flex flex-col space-y-1 mb-6 items-center">
+      <div className="flex flex-col space-y-2 mb-6 items-center">
         <h2 className="tracking-tight text-2xl font-medium ">Giriş Yap</h2>
-        <h4 className="tracking-tight text-sm text-shadow-md">
+        <h4 className="tracking-tight text-sm">
           Kullanıcı adı ve şifrenizi giriniz
         </h4>
       </div>

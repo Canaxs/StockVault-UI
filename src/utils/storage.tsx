@@ -15,6 +15,20 @@ const storage = {
   clearToken: () => {
     window.localStorage.removeItem(`${STORAGE_PREFIX}token`);
   },
+  getUsername: () => {
+    return JSON.parse(
+      window.localStorage.getItem(`${STORAGE_PREFIX}username`) as string
+    );
+  },
+  setUsername: (username: string) => {
+    window.localStorage.setItem(
+      `${STORAGE_PREFIX}username`,
+      JSON.stringify(username)
+    );
+  },
+  clearUsername: () => {
+    window.localStorage.removeItem(`${STORAGE_PREFIX}username`);
+  },
 };
 
 export default storage;

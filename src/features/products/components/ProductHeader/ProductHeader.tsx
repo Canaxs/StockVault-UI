@@ -37,7 +37,7 @@ export function ProductHeader() {
       <div className="flex">
         <div
           onClick={onOpenModal}
-          className="rounded-4xl lg:px-3 xl:px-4 px-2 h-10 lg:h-12 xl:h-14 bg-gradient-to-t from-green-500 to-emerald-600 text-white flex items-center justify-center gap-1 lg:gap-2 xl:gap-3 cursor-pointer hover:shadow-lg transition-all duration-300 hover:scale-105"
+          className="rounded-4xl lg:px-3 xl:px-4 px-2 h-10 lg:h-12 xl:h-14 bg-gradient-to-t from-green-500 to-emerald-600 text-white flex items-center justify-center gap-1 lg:gap-2 cursor-pointer hover:shadow-lg transition-all duration-300 hover:scale-105"
         >
           <span className="text-xl lg:text-2xl xl:text-3xl">+</span>
           <span className="font-medium text-xs lg:text-sm xl:text-base">

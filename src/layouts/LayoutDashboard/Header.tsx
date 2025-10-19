@@ -1,6 +1,10 @@
 import { Bell, Mail } from "lucide-react";
+import { useSelector } from "react-redux";
+import type { RootState } from "../../app/store";
 
 export const Header = () => {
+  const username = useSelector((state: RootState) => state.auth.username);
+
   return (
     <div className="bg-[#f7f7f7] rounded-xl w-full h-20">
       <div className="flex justify-between h-full p-3">
@@ -16,7 +20,9 @@ export const Header = () => {
             <img src="https://github.com/shadcn.png" className="rounded-full" />
           </div>
           <div>
-            <div className="text-xs lg:text-sm text-gray-600">Username</div>
+            <div className="text-xs lg:text-sm text-gray-600">
+              {username || "Username"}
+            </div>
             <div className="text-[10px] lg:text-xs text-gray-400">Role</div>
           </div>
         </div>
