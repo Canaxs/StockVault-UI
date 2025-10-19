@@ -11,12 +11,16 @@
   },
   "dependencies": {
     "@fontsource/poppins": "^5.2.7",
+    "@fontsource/raleway": "^5.2.8",
+    "@fontsource/roboto": "^5.2.8",
     "@reduxjs/toolkit": "^2.9.1",
     "@tailwindcss/vite": "^4.1.14",
+    "lucide-react": "^0.546.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-hot-toast": "^2.6.0",
     "react-redux": "^9.2.0",
+    "react-responsive-modal": "^7.1.0",
     "react-router-dom": "^7.9.4",
     "tailwindcss": "^4.1.14"
   },

@@ -1,0 +1,26 @@
+import { Bell, Mail } from "lucide-react";
+
+export const Header = () => {
+  return (
+    <div className="bg-[#f7f7f7] rounded-xl w-full h-20">
+      <div className="flex justify-between h-full p-3">
+        <div></div>
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-white flex items-center justify-center">
+            <Mail size={18} />
+          </div>
+          <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-white flex items-center justify-center">
+            <Bell size={18} />
+          </div>
+          <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-white flex items-center justify-center">
+            <img src="https://github.com/shadcn.png" className="rounded-full" />
+          </div>
+          <div>
+            <div className="text-xs lg:text-sm text-gray-600">Username</div>
+            <div className="text-[10px] lg:text-xs text-gray-400">Role</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};

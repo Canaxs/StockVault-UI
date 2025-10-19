@@ -2,7 +2,7 @@ import React from "react";
 
 export interface TextInputProps {
   label: string;
-  value: string;
+  value: string | number;
   inputClassName: string;
   onChange: (value: string) => void;
   type?: "text" | "password" | "email";

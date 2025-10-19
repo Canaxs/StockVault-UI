@@ -12,7 +12,7 @@ export function Login() {
             className="object-fill"
           />
           <p className="font-medium text-base text-shadow-xs text-gray-800">
-            Depo Yönetim Paneli
+            StockVault
           </p>
         </div>
         <LoginForm />
