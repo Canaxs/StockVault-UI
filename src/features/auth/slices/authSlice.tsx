@@ -6,6 +6,7 @@ import { loginApi } from "../api/loginApi";
 const initialState: AuthState = {
   token: storage.getToken() || null,
   username: storage.getUsername() || null,
+  roles: storage.getRoles() || null,
 };
 
 const slice = createSlice({
@@ -15,25 +16,32 @@ const slice = createSlice({
     logout: (state) => {
       state.token = null;
       state.username = null;
+      state.roles = null;
       storage.clearToken();
       storage.clearUsername();
+      storage.clearRoles();
     },
   },
   extraReducers: (builder) => {
-    builder.addMatcher(
-      loginApi.endpoints.login.matchFulfilled,
-      (state, { payload, meta }) => {
-        const { token } = payload;
-        state.token = token;
-        storage.setToken(token);
-
-        const requestBody = meta.arg.originalArgs;
-        if (requestBody?.username) {
-          state.username = requestBody.username;
-          storage.setUsername(requestBody.username);
+    builder
+      .addMatcher(
+        loginApi.endpoints.login.matchFulfilled,
+        (state, { payload }) => {
+          const { token } = payload;
+          state.token = token;
+          storage.setToken(token);
         }
-      }
-    );
+      )
+      .addMatcher(
+        loginApi.endpoints.GetClaims.matchFulfilled,
+        (state, { payload }) => {
+          const { username, roles } = payload;
+          state.username = username;
+          state.roles = roles;
+          storage.setUsername(username);
+          storage.setRoles(roles);
+        }
+      );
   },
 });
 

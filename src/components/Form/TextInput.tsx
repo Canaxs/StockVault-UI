@@ -26,7 +26,7 @@ export const TextInput: React.FC<TextInputProps> = ({
     <div className="flex flex-col gap-2">
       <label
         htmlFor={name}
-        className="text-sm text-gray-900 tracking-tight text-shadow-xs"
+        className="text-xs md:text-sm text-gray-900 tracking-tight text-shadow-xs"
       >
         {label} {required && <span className="text-red-500">*</span>}
       </label>
@@ -37,7 +37,7 @@ export const TextInput: React.FC<TextInputProps> = ({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className={`border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-gray-400 ${inputClassName}`}
+        className={`border text-xs md:text-sm border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-gray-400 ${inputClassName}`}
       />
     </div>
   );

@@ -29,6 +29,20 @@ const storage = {
   clearUsername: () => {
     window.localStorage.removeItem(`${STORAGE_PREFIX}username`);
   },
+  getRoles: () => {
+    return JSON.parse(
+      window.localStorage.getItem(`${STORAGE_PREFIX}roles`) as string
+    );
+  },
+  setRoles: (roles: string[]) => {
+    window.localStorage.setItem(
+      `${STORAGE_PREFIX}roles`,
+      JSON.stringify(roles)
+    );
+  },
+  clearRoles: () => {
+    window.localStorage.removeItem(`${STORAGE_PREFIX}roles`);
+  },
 };
 
 export default storage;

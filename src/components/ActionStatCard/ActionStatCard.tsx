@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { ArrowUpRight, ChevronDown, ChevronUp } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import Modal from "react-responsive-modal";
@@ -44,7 +44,7 @@ export function ActionStatCard<T = any>({
       className={`flex flex-col relative justify-between rounded-2xl shadow-sm p-5 border border-gray-100 hover:shadow-md transition-all duration-300`}
     >
       <p
-        className={`text-transparent bg-clip-text bg-gradient-to-t ${gradient} text-lg mb-3`}
+        className={`text-transparent bg-clip-text bg-gradient-to-t ${gradient} text-base md:text-lg mb-3`}
       >
         {title}
       </p>
@@ -63,7 +63,7 @@ export function ActionStatCard<T = any>({
           handleOpenModal();
         }}
         variant="secondary"
-        className={`mt-4 rounded-xl bg-gradient-to-t ${gradient} w-full hover:shadow-md transition-all duration-300`}
+        className={`mt-4 text-xs md:text-sm rounded-xl bg-gradient-to-t ${gradient} w-full hover:shadow-md transition-all duration-300`}
       >
         {buttonLabel}
       </Button>

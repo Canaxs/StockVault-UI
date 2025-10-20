@@ -20,7 +20,6 @@ interface DataTableProps {
   onNext?: () => void;
   onPrevious?: () => void;
 
-  /** Modal içerik componentini dışarıdan almak için */
   renderModalContent?: (item: any) => React.ReactNode;
 }
 
@@ -52,7 +51,9 @@ export const PaginateTable: React.FC<DataTableProps> = ({
   return (
     <div className="bg-white rounded-2xl shadow-md p-6 w-full flex flex-col">
       {title && (
-        <h3 className="text-xl font-medium mb-4 text-gray-700">{title}</h3>
+        <h3 className="text-base md:text-lg lg:text-xl font-medium mb-4 text-gray-700">
+          {title}
+        </h3>
       )}
 
       <div className="overflow-x-auto flex-1">
@@ -62,7 +63,7 @@ export const PaginateTable: React.FC<DataTableProps> = ({
               {columns.map((col) => (
                 <th
                   key={col.key}
-                  className="p-3 text-sm font-medium text-gray-600 uppercase tracking-wider border-b border-gray-200"
+                  className="p-3 text-xs md:text-sm font-medium text-gray-600 uppercase tracking-wider border-b border-gray-200"
                 >
                   {col.label}
                 </th>
@@ -84,7 +85,7 @@ export const PaginateTable: React.FC<DataTableProps> = ({
                 {columns.map((col) => (
                   <td
                     key={col.key}
-                    className="p-3 text-sm text-gray-700 truncate max-w-xs"
+                    className="p-3 text-xs md:text-sm text-gray-700 truncate max-w-xs"
                     title={item[col.key]}
                   >
                     {col.render ? col.render(item) : item[col.key]}
@@ -97,14 +98,14 @@ export const PaginateTable: React.FC<DataTableProps> = ({
       </div>
 
       <div className="flex items-center justify-between mt-6">
-        <div className="text-sm text-gray-600">
+        <div className="text-xs md:text-sm text-gray-600">
           Toplam {totalCount} kayıt listeleniyor
         </div>
         <div className="flex gap-2">
           <button
             onClick={onPrevious}
             disabled={!hasPrevious}
-            className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-all ${
+            className={`flex items-center gap-1 px-3 py-2 rounded-lg text-xs md:text-sm font-medium transition-all ${
               hasPrevious
                 ? "bg-gray-100 hover:bg-gray-200 text-gray-700 cursor-pointer"
                 : "bg-gray-50 text-gray-400 cursor-no-drop"
@@ -116,7 +117,7 @@ export const PaginateTable: React.FC<DataTableProps> = ({
           <button
             onClick={onNext}
             disabled={!hasNext}
-            className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-all ${
+            className={`flex items-center gap-1 px-3 py-2 rounded-lg text-xs md:text-sm font-medium transition-all ${
               hasNext
                 ? "bg-gray-100 hover:bg-gray-200 text-gray-700 cursor-pointer"
                 : "bg-gray-50 text-gray-400 cursor-no-drop"
@@ -128,7 +129,6 @@ export const PaginateTable: React.FC<DataTableProps> = ({
         </div>
       </div>
 
-      {/* Modal */}
       <Modal open={open} onClose={onCloseModal} center>
         {selectedItem &&
           (renderModalContent ? (

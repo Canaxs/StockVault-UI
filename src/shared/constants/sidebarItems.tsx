@@ -17,5 +17,10 @@ export const sidebarItems = [
   { name: "Ürünler", icon: <Package size={20} />, path: "/products" },
   { name: "Sevkiyatlar", icon: <Truck size={20} />, path: "/shipments" },
   { name: "Müşteriler", icon: <Users size={20} />, path: "/customers" },
-  { name: "Kullanıcılar", icon: <UserCog size={20} />, path: "/users" },
+  {
+    name: "Kullanıcılar",
+    icon: <UserCog size={20} />,
+    path: "/users",
+    requiresAdmin: true,
+  },
 ];

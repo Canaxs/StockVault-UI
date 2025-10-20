@@ -1,6 +1,7 @@
 import { api } from "../../../api/api.tsx";
 import type { CreatedTokenResponse } from "../types/CreatedTokenResponse";
 import type { CreateTokenRequest } from "../types/CreateTokenRequest.tsx";
+import type { GetByClaimsResponse } from "../types/GetByClaimsResponse.tsx";
 
 export const loginApi = api.injectEndpoints({
   endpoints: (builder) => ({
@@ -11,7 +12,13 @@ export const loginApi = api.injectEndpoints({
         body: credentials,
       }),
     }),
+    GetClaims: builder.query<GetByClaimsResponse, void>({
+      query: () => ({
+        url: "/Auth/Claims",
+        method: "Get",
+      }),
+    }),
   }),
 });
 
-export const { useLoginMutation } = loginApi;
+export const { useLoginMutation, useGetClaimsQuery } = loginApi;

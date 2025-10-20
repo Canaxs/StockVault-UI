@@ -25,6 +25,7 @@ const warehouseByProductIdColumns: {
   key: keyof GetListWarehouseByProductIdListItemDto;
   label: string;
 }[] = [
+  { key: "warehouseId", label: "Depo Numarası" },
   { key: "warehouseName", label: "Depo Adı" },
   { key: "warehouseLocation", label: "Adresi" },
   { key: "quantity", label: "Miktar" },
@@ -59,7 +60,10 @@ const customerByProductIdColumns: {
 ];
 
 export function ProductDashboard() {
-  const [productId, setProductId] = useState<number>(0);
+  const [warehouseProductId, setWarehouseProductId] = useState<number>(0);
+  const [shipmentProductId, setShipmentProductId] = useState<number>(0);
+  const [customerProductId, setCustomerProductId] = useState<number>(0);
+
   const [page, setPage] = useState(0);
   const pageSize = 10;
 
@@ -71,19 +75,19 @@ export function ProductDashboard() {
   const response = productQuery.data;
 
   const warehouseByProductIdQuery = useGetListWarehouseByProductIdQuery({
-    Id: productId,
+    Id: warehouseProductId,
     PageIndex: 0,
     PageSize: 20,
   });
 
   const shipmentByProductIdQuery = useGetListShipmentByProductIdQuery({
-    Id: productId,
+    Id: shipmentProductId,
     PageIndex: 0,
     PageSize: 20,
   });
 
   const customerByProductIdQuery = useGetListCustomerByProductIdQuery({
-    Id: productId,
+    Id: customerProductId,
     PageIndex: 0,
     PageSize: 20,
   });
@@ -132,34 +136,34 @@ export function ProductDashboard() {
           <ActionStatCard
             title="Stok Durumu"
             gradient="from-green-600 to-emerald-800"
-            inputLabel="Ürün Id"
-            placeholder="Ürün Id giriniz..."
+            inputLabel="Ürün Numarası"
+            placeholder="Ürün Numarası giriniz..."
             columns={warehouseByProductIdColumns}
             buttonLabel="Görüntüle"
             items={warehouseByProductIdQuery.data?.items}
-            onSubmit={(value) => setProductId(parseInt(value))}
+            onSubmit={(value) => setWarehouseProductId(parseInt(value))}
           />
           <ActionStatCard
             title="Müşteri Durumu"
             gradient="from-gray-500 to-gray-900"
-            inputLabel="Ürün Id"
-            placeholder="Ürün Id giriniz..."
+            inputLabel="Ürün Numarası"
+            placeholder="Ürün Numarası giriniz..."
             columns={customerByProductIdColumns}
             buttonLabel="Görüntüle"
             items={customerByProductIdQuery.data?.items}
-            onSubmit={(value) => setProductId(parseInt(value))}
+            onSubmit={(value) => setCustomerProductId(parseInt(value))}
           />
         </div>
         <div className="col-span-5 md:col-span-4  lg:col-span-2 xl:col-span-1">
           <ActionStatCard
             title="Sipariş Durumu"
             gradient="from-orange-400 to-red-800"
-            inputLabel="Ürün Id"
-            placeholder="Ürün Id giriniz..."
+            inputLabel="Ürün Numarası"
+            placeholder="Ürün Numarası giriniz..."
             columns={shipmentByProductIdColumns}
             buttonLabel="Görüntüle"
             items={shipmentByProductIdQuery.data?.items}
-            onSubmit={(value) => setProductId(parseInt(value))}
+            onSubmit={(value) => setShipmentProductId(parseInt(value))}
           />
         </div>
       </div>

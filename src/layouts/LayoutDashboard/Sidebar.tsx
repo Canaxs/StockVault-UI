@@ -1,16 +1,18 @@
 import { NavLink, useLocation } from "react-router-dom";
 import { sidebarItems } from "../../shared/constants/sidebarItems";
 import { useState } from "react";
+import { useAuth } from "../../features/auth/hooks/useAuth";
 
 export const Sidebar = () => {
+  const { isAdmin } = useAuth();
   const location = useLocation();
   const [pathName] = useState(location.pathname);
 
   return (
-    <div className="bg-[#f7f7f7] rounded-xl h-full w-56 xl:w-60 2xl:w-64">
+    <div className="bg-[#f7f7f7] rounded-xl w-56 xl:w-60 2xl:w-64">
       <div className="flex items-center gap-1 py-7 justify-center">
-        <img src="depo-logo.png" width={60} height={60} />
-        <span className="text-base text-gray-800 text-shadow-md">
+        <img src="depo-logo.png" className="w-12 h-12 xl:w-16 xl:h-16" />
+        <span className="text-sm xl:text-base text-gray-800 text-shadow-md">
           StockVault
         </span>
       </div>
@@ -19,33 +21,38 @@ export const Sidebar = () => {
           MENÜ
         </span>
         <ul className="text-gray-600">
-          {sidebarItems.map((item, index) => (
-            <li key={`sidebarItem-${index}`}>
-              <NavLink
-                to={item.path}
-                className={`relative flex items-center mb-3 rounded-lg transition-colors duration-200 ${
-                  pathName == item.path ? "text-black" : "hover:bg-gray-200"
-                }`}
-              >
-                {/* Sol renk çubuğu */}
-                <span
-                  className={`absolute h-full w-[7px] rounded-br-full rounded-tr-full ${
-                    pathName == item.path ? "bg-[#33986a]" : "bg-transparent"
-                  }`}
-                ></span>
-                <div className="flex p-3 items-center gap-3 ml-2">
+          {sidebarItems.map((item, index) => {
+            const disabled = item.requiresAdmin && !isAdmin;
+
+            return (
+              <li key={`sidebarItem-${index}`}>
+                <NavLink
+                  to={disabled ? "#" : item.path}
+                  className={`relative flex items-center mb-3 rounded-lg transition-colors duration-200 ${
+                    pathName === item.path ? "text-black" : "hover:bg-gray-200"
+                  } ${disabled ? "opacity-50 pointer-events-none" : ""}`}
+                >
                   <span
-                    className={`${
-                      pathName == item.path ? "text-[#33986a]" : "text-gray-400"
+                    className={`absolute h-full w-[7px] rounded-br-full rounded-tr-full ${
+                      pathName === item.path ? "bg-[#33986a]" : "bg-transparent"
                     }`}
-                  >
-                    {item.icon}
-                  </span>
-                  <span>{item.name}</span>
-                </div>
-              </NavLink>
-            </li>
-          ))}
+                  ></span>
+                  <div className="flex p-3 items-center gap-3 ml-2">
+                    <span
+                      className={`${
+                        pathName === item.path
+                          ? "text-[#33986a]"
+                          : "text-gray-400"
+                      }`}
+                    >
+                      {item.icon}
+                    </span>
+                    <span className="text-sm xl:text-base">{item.name}</span>
+                  </div>
+                </NavLink>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </div>

@@ -43,7 +43,7 @@ export function Dashboard() {
           kritik uyarılar ile işinizi en verimli şekilde yönetin.
         </p>
       </div>
-      <div className="grid lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-3 mb-5">
+      <div className="grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-3 mb-5">
         <StatCard
           title="Toplam Ürün"
           value={245}

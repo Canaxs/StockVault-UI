@@ -4,6 +4,7 @@ import type { RootState } from "../../app/store";
 
 export const Header = () => {
   const username = useSelector((state: RootState) => state.auth.username);
+  const roles = useSelector((state: RootState) => state.auth.roles);
 
   return (
     <div className="bg-[#f7f7f7] rounded-xl w-full h-20">
@@ -23,7 +24,9 @@ export const Header = () => {
             <div className="text-xs lg:text-sm text-gray-600">
               {username || "Username"}
             </div>
-            <div className="text-[10px] lg:text-xs text-gray-400">Role</div>
+            <div className="text-[10px] lg:text-xs text-gray-400">
+              {roles?.[roles.length - 1]}
+            </div>
           </div>
         </div>
       </div>

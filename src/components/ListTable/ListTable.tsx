@@ -29,7 +29,9 @@ export const ListTable: React.FC<DataTableProps> = ({
   return (
     <div className="bg-white rounded-2xl shadow-md p-6 w-full">
       {title && (
-        <h3 className="text-xl font-medium mb-4 text-gray-700">{title}</h3>
+        <h3 className="text-base md:text-lg lg:text-xl font-medium mb-4 text-gray-700">
+          {title}
+        </h3>
       )}
       <div className="overflow-x-auto">
         <table className="w-full text-left table-auto border-separate border-spacing-0">
@@ -38,7 +40,7 @@ export const ListTable: React.FC<DataTableProps> = ({
               {columns.map((col: any) => (
                 <th
                   key={col.key}
-                  className="p-3 text-sm font-medium text-gray-600 uppercase tracking-wider border-b border-gray-200"
+                  className="p-3 text-xs md:text-sm font-medium text-gray-600 uppercase tracking-wider border-b border-gray-200"
                 >
                   {col.label}
                 </th>
@@ -66,8 +68,8 @@ export const ListTable: React.FC<DataTableProps> = ({
                 {columns.map((col: any) => (
                   <td
                     key={col.key}
-                    className="p-3 text-sm text-gray-700 truncate max-w-xs"
-                    title={item[col.key]} // Hover'da full text göster
+                    className="p-3 text-xs md:text-sm text-gray-700 truncate max-w-xs"
+                    title={item[col.key]}
                   >
                     {col.render ? col.render(item) : item[col.key]}
                   </td>
