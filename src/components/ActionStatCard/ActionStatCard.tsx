@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import Modal from "react-responsive-modal";
 import { Button } from "../Form/Button";
 import { TextInput } from "../Form/TextInput";
+import toast from "react-hot-toast";
 
 interface ActionStatCardProps<T = any> {
   title: string;
@@ -59,6 +60,10 @@ export function ActionStatCard<T = any>({
 
       <Button
         onClick={() => {
+          if (!inputValue.trim()) {
+            toast.error(`Lütfen ${inputLabel.toLowerCase()} giriniz.`);
+            return;
+          }
           if (onSubmit) onSubmit(inputValue);
           handleOpenModal();
         }}

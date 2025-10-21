@@ -13,6 +13,7 @@ import type { GetListWarehouseByProductIdListItemDto } from "../../types/GetList
 import type { GetListShipmentByProductIdListItemDto } from "../../types/GetListShipmentByProductIdListItemDto";
 import type { GetListCustomerByProductIdListItemDto } from "../../types/GetListCustomerByProductIdListItemDto";
 import { ProductDetailModal } from "../../components/ProductDetailModal/ProductDetailModal";
+import { ProductActionStatCard } from "../../components/ProductActionStatCard/ProductActionStatCard";
 
 const productColumns = [
   { key: "id", label: "Id" },
@@ -135,7 +136,7 @@ export function ProductDashboard() {
             onSubmit={(value) => setCustomerProductId(parseInt(value))}
           />
         </div>
-        <div className="col-span-5 md:col-span-4  lg:col-span-2 xl:col-span-1">
+        <div className="col-span-5 md:col-span-4  lg:col-span-2 xl:col-span-1 gap-3">
           <ActionStatCard
             title="Sipariş Durumu"
             gradient="from-orange-400 to-red-800"
@@ -146,6 +147,7 @@ export function ProductDashboard() {
             items={shipmentByProductIdQuery.data?.items}
             onSubmit={(value) => setShipmentProductId(parseInt(value))}
           />
+          <ProductActionStatCard />
         </div>
       </div>
     </div>

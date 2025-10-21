@@ -1,6 +1,8 @@
 import { api } from "../../../api/api.tsx";
 import type { CreatedProductStockResponse } from "../types/CreatedProductStockResponse.tsx";
 import type { CreateProductStockRequest } from "../types/CreateProductStockRequest.tsx";
+import type { GetProductStockByProductIdAndWarehouseIdRequest } from "../types/GetProductStockByProductIdAndWarehouseIdRequest.tsx";
+import type { GetProductStockByProductIdAndWarehouseIdResponse } from "../types/GetProductStockByProductIdAndWarehouseIdResponse.tsx";
 
 export const productStockApi = api.injectEndpoints({
   endpoints: (builder) => ({
@@ -14,7 +16,20 @@ export const productStockApi = api.injectEndpoints({
         body: request,
       }),
     }),
+    GetProductStockByProductIdAndWarehouseId: builder.query<
+      GetProductStockByProductIdAndWarehouseIdResponse,
+      GetProductStockByProductIdAndWarehouseIdRequest
+    >({
+      query: (request) => ({
+        url: `/ProductStock/Product/${request.productId}/Warehouse/${request.warehouseId}`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useAddProductStockMutation } = productStockApi;
+export const {
+  useAddProductStockMutation,
+  useGetProductStockByProductIdAndWarehouseIdQuery,
+  useLazyGetProductStockByProductIdAndWarehouseIdQuery,
+} = productStockApi;
