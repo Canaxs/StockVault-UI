@@ -7,10 +7,10 @@ import {
   useGetListWarehouseQuery,
 } from "../../api/warehouseApi";
 import { WarehouseHeader } from "../../components/WarehouseHeader/WarehouseHeader";
-import { Button } from "../../../../components/Form/Button";
 import { ActionStatCard } from "../../../../components/ActionStatCard/ActionStatCard";
 import type { GetListProductByWarehouseIdListItemDto } from "../../types/GetListProductByWarehouseIdListItemDto";
 import type { GetListShipmentByWarehouseIdListItemDto } from "../../types/GetListShipmentByWarehouseIdListItemDto";
+import { WarehouseDetailModal } from "../../components/WarehouseDetailModal/WarehouseDetailModal";
 
 const warehouseColumns = [
   { key: "id", label: "Id" },
@@ -89,26 +89,7 @@ export function WarehouseDashboard() {
             onPrevious={() => {
               if (response?.hasPrevious) setPage((prev) => prev - 1);
             }}
-            renderModalContent={(item) => (
-              <div className="flex flex-col gap-3 p-5 min-w-[300px]">
-                <h2 className="font-medium text-lg">Depo Detayı</h2>
-                <p>
-                  <strong>Ad:</strong> {item.name}
-                </p>
-                <p>
-                  <strong>Lokasyon:</strong> {item.location}
-                </p>
-                <p>
-                  <strong>Kapasite:</strong> {item.maxCapacity}
-                </p>
-                <Button
-                  variant="secondary"
-                  onClick={() => console.log(item.id)}
-                >
-                  Düzenle
-                </Button>
-              </div>
-            )}
+            renderModalContent={(item) => <WarehouseDetailModal item={item} />}
           />
         </div>
         <div className="col-span-5 md:col-span-4 lg:col-span-2 xl:col-span-1 flex flex-col gap-3">

@@ -7,6 +7,8 @@ import type { GetListShipmentByWarehouseIdRequest } from "../types/GetListShipme
 import type { GetListShipmentByWarehouseIdResponse } from "../types/GetListShipmentByWarehouseIdResponse.tsx";
 import type { GetListWarehouseRequest } from "../types/GetListWarehouseRequest.tsx";
 import type { GetListWarehouseResponse } from "../types/GetListWarehouseResponse.tsx";
+import type { UpdateWarehouseRequest } from "../types/UpdateWarehouseRequest.tsx";
+import type { UpdateWarehouseResponse } from "../types/UpdateWarehouseResponse.tsx";
 
 export const warehouseApi = api.injectEndpoints({
   endpoints: (builder) => ({
@@ -59,6 +61,16 @@ export const warehouseApi = api.injectEndpoints({
         },
       }),
     }),
+    UpdateWarehouse: builder.mutation<
+      UpdateWarehouseResponse,
+      UpdateWarehouseRequest
+    >({
+      query: (request) => ({
+        url: "/Warehouse",
+        method: "PUT",
+        body: request,
+      }),
+    }),
   }),
 });
 
@@ -67,4 +79,5 @@ export const {
   useGetListWarehouseQuery,
   useGetListProductByWarehouseIdQuery,
   useGetListShipmentByWarehouseIdQuery,
+  useUpdateWarehouseMutation,
 } = warehouseApi;
