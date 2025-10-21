@@ -8,11 +8,11 @@ import {
   useGetListWarehouseByProductIdQuery,
 } from "../../api/productApi";
 import { ProductHeader } from "../../components/ProductHeader/ProductHeader";
-import { Button } from "../../../../components/Form/Button";
 import { ActionStatCard } from "../../../../components/ActionStatCard/ActionStatCard";
 import type { GetListWarehouseByProductIdListItemDto } from "../../types/GetListWarehouseByProductIdListItemDto";
 import type { GetListShipmentByProductIdListItemDto } from "../../types/GetListShipmentByProductIdListItemDto";
 import type { GetListCustomerByProductIdListItemDto } from "../../types/GetListCustomerByProductIdListItemDto";
+import { ProductDetailModal } from "../../components/ProductDetailModal/ProductDetailModal";
 
 const productColumns = [
   { key: "id", label: "Id" },
@@ -110,26 +110,7 @@ export function ProductDashboard() {
             onPrevious={() => {
               if (response?.hasPrevious) setPage((prev) => prev - 1);
             }}
-            renderModalContent={(item) => (
-              <div className="flex flex-col gap-3 p-5 min-w-[300px]">
-                <h2 className="font-medium text-lg">Ürün Detayı</h2>
-                <p>
-                  <strong>Adı:</strong> {item.name}
-                </p>
-                <p>
-                  <strong>Açıklama:</strong> {item.description}
-                </p>
-                <p>
-                  <strong>Fiyat:</strong> {item.price} ₺
-                </p>
-                <Button
-                  variant="secondary"
-                  onClick={() => console.log(item.id)}
-                >
-                  Düzenle
-                </Button>
-              </div>
-            )}
+            renderModalContent={(item) => <ProductDetailModal item={item} />}
           />
         </div>
         <div className="col-span-5 md:col-span-4 lg:col-span-2 xl:col-span-1 flex flex-col gap-3">

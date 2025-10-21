@@ -11,6 +11,8 @@ import type { GetListTopSellingProductRequest } from "../types/GetListTopSelling
 import type { GetListTopSellingProductResponse } from "../types/GetListTopSellingProductResponse.tsx";
 import type { GetListWarehouseByProductIdRequest } from "../types/GetListWarehouseByProductIdRequest.tsx";
 import type { GetListWarehouseByProductIdResponse } from "../types/GetListWarehouseByProductIdResponse.tsx";
+import type { UpdatedProductResponse } from "../types/UpdatedProductResponse.tsx";
+import type { UpdateProductRequest } from "../types/UpdateProductRequest.tsx";
 
 export const productApi = api.injectEndpoints({
   endpoints: (builder) => ({
@@ -93,6 +95,16 @@ export const productApi = api.injectEndpoints({
         },
       }),
     }),
+    UpdateProduct: builder.mutation<
+      UpdatedProductResponse,
+      UpdateProductRequest
+    >({
+      query: (request) => ({
+        url: "/Product",
+        method: "PUT",
+        body: request,
+      }),
+    }),
   }),
 });
 
@@ -103,4 +115,5 @@ export const {
   useGetListWarehouseByProductIdQuery,
   useGetListShipmentByProductIdQuery,
   useGetListCustomerByProductIdQuery,
+  useUpdateProductMutation,
 } = productApi;
