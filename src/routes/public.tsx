@@ -14,4 +14,12 @@ export const publicRoutes = ({
       <Navigate to="/dashboard" replace />
     ),
   },
+  {
+    path: "/",
+    element: !isAuthenticated ? (
+      <Navigate to="/login" replace />
+    ) : (
+      <Navigate to="/dashboard" replace />
+    ),
+  },
 ];
