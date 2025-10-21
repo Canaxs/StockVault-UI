@@ -1,6 +1,7 @@
 import { Bell, Mail } from "lucide-react";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../app/store";
+import { HamburgerMenu } from "./HamburgerMenu";
 
 export const Header = () => {
   const username = useSelector((state: RootState) => state.auth.username);
@@ -9,7 +10,9 @@ export const Header = () => {
   return (
     <div className="bg-[#f7f7f7] rounded-xl w-full h-20">
       <div className="flex justify-between h-full p-3">
-        <div></div>
+        <div>
+          <HamburgerMenu />
+        </div>
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-white flex items-center justify-center">
             <Mail size={18} />

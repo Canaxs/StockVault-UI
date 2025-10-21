@@ -1,31 +1,46 @@
-import { NavLink, useLocation } from "react-router-dom";
-import { sidebarItems } from "../../shared/constants/sidebarItems";
+import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { sidebarItems } from "../../shared/constants/sidebarItems";
 import { useAuth } from "../../features/auth/hooks/useAuth";
+import { NavLink, useLocation } from "react-router-dom";
 
-export const Sidebar = () => {
+export const HamburgerMenu = () => {
+  const [open, setOpen] = useState(false);
   const { isAdmin } = useAuth();
   const location = useLocation();
   const [pathName] = useState(location.pathname);
 
   return (
-    <div className="bg-[#f7f7f7] hidden lg:block rounded-xl w-56 xl:w-60 2xl:w-64">
-      <div className="flex items-center gap-1 py-7 justify-center">
-        <img src="depo-logo.png" className="w-12 h-12 xl:w-16 xl:h-16" />
-        <span className="text-sm xl:text-base text-gray-800 text-shadow-md">
-          StockVault
-        </span>
+    <>
+      <div className="flex items-center h-full lg:hidden">
+        <div
+          onClick={() => setOpen(true)}
+          className="flex items-center ml-2 bg-white w-10 h-10 justify-center rounded-lg cursor-pointer hover:scale-105 hover:bg-gray-50 transition-all"
+        >
+          <Menu className="text-black" size={30} />
+        </div>
       </div>
-      <div className="flex flex-col space-y-5">
-        <span className="text-gray-400 text-xs font-medium leading-5 ml-3">
-          MENÜ
-        </span>
-        <ul className="text-gray-600">
+      <div
+        className={`fixed top-0 left-0 h-full w-64 bg-white shadow-lg transform transition-transform duration-300 z-50 ${
+          open ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+        <div className="flex justify-between items-center p-4 border-b border-gray-200">
+          <h2 className="text-base font-medium text-center">Menü</h2>
+          <button
+            onClick={() => setOpen(false)}
+            className="cursor-pointer transition-all hover:scale-105 "
+          >
+            <X size={24} />
+          </button>
+        </div>
+
+        <ul className="flex flex-col py-3 space-y-3">
           {sidebarItems.map((item, index) => {
             const disabled = item.requiresAdmin && !isAdmin;
 
             return (
-              <li key={`sidebarItem-${index}`}>
+              <li key={`hamburgerSidebarItem-${index}`}>
                 <NavLink
                   to={disabled ? "#" : item.path}
                   className={`relative flex items-center mb-3 rounded-lg transition-colors duration-200 ${
@@ -55,6 +70,12 @@ export const Sidebar = () => {
           })}
         </ul>
       </div>
-    </div>
+      {open && (
+        <div
+          onClick={() => setOpen(false)}
+          className="fixed inset-0 bg-black bg-opacity-30 z-40"
+        />
+      )}
+    </>
   );
 };
