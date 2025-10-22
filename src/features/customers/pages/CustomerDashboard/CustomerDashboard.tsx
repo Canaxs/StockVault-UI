@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Button } from "../../../../components/Form/Button";
 import { PaginateTable } from "../../../../components/PaginateTable/PaginateTable";
 import { LayoutDashboard } from "../../../../layouts/LayoutDashboard/LayoutDashboard";
 import {
@@ -11,6 +10,7 @@ import { CustomerHeader } from "../../components/CustomerHeader/CustomerHeader";
 import { ActionStatCard } from "../../../../components/ActionStatCard/ActionStatCard";
 import type { GetListShipmentByCustomerIdListItemDto } from "../../types/GetListShipmentByCustomerIdListItemDto";
 import type { GetListProductByCustomerIdListItemDto } from "../../types/GetListProductByCustomerIdListItemDto";
+import { CustomerDetailModal } from "../../components/CustomerDetailModal/CustomerDetailModal";
 
 const customerColumns = [
   { key: "id", label: "Id" },
@@ -91,35 +91,7 @@ export function CustomerDashboard() {
             onPrevious={() => {
               if (response?.hasPrevious) setPage((prev) => prev - 1);
             }}
-            renderModalContent={(item) => (
-              <div className="flex flex-col gap-3 p-5 min-w-[300px]">
-                <h2 className="font-medium text-lg">Ürün Detayı</h2>
-                <p>
-                  <strong>Adı:</strong> {item.name}
-                </p>
-                <p>
-                  <strong>Çalıştığı Şirket:</strong> {item.companyName}
-                </p>
-                <p>
-                  <strong>Adresi:</strong> {item.address}
-                </p>
-                <p>
-                  <strong>Yaşadığı Şehir:</strong> {item.city}
-                </p>
-                <p>
-                  <strong>Telefon Numarası:</strong> {item.phoneNumber}
-                </p>
-                <p>
-                  <strong>Oluşturulma Tarihi:</strong> {item.createdDate}
-                </p>
-                <Button
-                  variant="secondary"
-                  onClick={() => console.log(item.id)}
-                >
-                  Düzenle
-                </Button>
-              </div>
-            )}
+            renderModalContent={(item) => <CustomerDetailModal item={item} />}
           />
         </div>
         <div className="col-span-5 md:col-span-4 lg:col-span-2 xl:col-span-1 flex flex-col gap-3">

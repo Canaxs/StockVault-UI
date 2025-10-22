@@ -7,6 +7,8 @@ import type { GetListProductByCustomerIdRequest } from "../types/GetListProductB
 import type { GetListProductByCustomerIdResponse } from "../types/GetListProductByCustomerIdResponse.tsx";
 import type { GetListShipmentByCustomerIdRequest } from "../types/GetListShipmentByCustomerIdRequest.tsx";
 import type { GetListShipmentByCustomerIdResponse } from "../types/GetListShipmentByCustomerIdResponse.tsx";
+import type { UpdateCustomerRequest } from "../types/UpdateCustomerRequest.tsx";
+import type { UpdateCustomerResponse } from "../types/UpdateCustomerResponse.tsx";
 
 export const customerApi = api.injectEndpoints({
   endpoints: (builder) => ({
@@ -59,6 +61,16 @@ export const customerApi = api.injectEndpoints({
         },
       }),
     }),
+    UpdateCustomer: builder.mutation<
+      UpdateCustomerResponse,
+      UpdateCustomerRequest
+    >({
+      query: (request) => ({
+        url: "/Customer",
+        method: "PUT",
+        body: request,
+      }),
+    }),
   }),
 });
 
@@ -67,4 +79,5 @@ export const {
   useGetListCustomerQuery,
   useGetListShipmentByCustomerIdQuery,
   useGetListProductByCustomerIdQuery,
+  useUpdateCustomerMutation,
 } = customerApi;

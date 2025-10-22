@@ -57,7 +57,7 @@ export const ShipmentDetailModal: React.FC<ShipmentDetailModalProps> = ({
 
   return (
     <div className="flex flex-col gap-3 p-5 min-w-[300px]">
-      <h2 className="font-medium text-lg">Ürün Detayı</h2>
+      <h2 className="font-medium text-lg">Sevkiyat Detayı</h2>
 
       {isEditing ? (
         <>
