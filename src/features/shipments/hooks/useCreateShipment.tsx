@@ -15,7 +15,7 @@ export function useCreateShipment() {
       toast.success("Sipariş başarıyla oluşturuldu!");
       return response;
     } catch (err: any) {
-      toast.error("Sipariş oluşturulurken bir hata oluştu!");
+      toast.error(err?.data?.detail || "Bir hata oluştu");
       console.error("createShipment error:", err);
       throw err;
     }

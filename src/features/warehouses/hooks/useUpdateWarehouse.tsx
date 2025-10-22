@@ -15,7 +15,7 @@ export function useUpdateWarehouse() {
       toast.success("Depo başarıyla Güncellendi!");
       return response;
     } catch (err: any) {
-      toast.error("Depo güncellenirken bir hata oluştu!");
+      toast.error(err?.data?.detail || "Bir hata oluştu");
       console.error("updateWarehouse error:", err);
       throw err;
     }

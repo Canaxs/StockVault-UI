@@ -19,7 +19,7 @@ export const useLoginUser = () => {
       loginResponse = await login({ username, password }).unwrap();
     } catch (err: any) {
       toast.error(
-        err?.data?.message || "Kullanıcı adı veya şifre yanlış. Tekrar deneyin."
+        err?.data?.detail || "Kullanıcı adı veya şifre yanlış. Tekrar deneyin."
       );
       throw err;
     }
@@ -29,7 +29,7 @@ export const useLoginUser = () => {
         loginApi.endpoints.GetClaims.initiate()
       ).unwrap();
     } catch (err: any) {
-      toast.error(err?.data?.message || "Rol bilgileri alınamadı.");
+      toast.error(err?.data?.detail || "Rol bilgileri alınamadı.");
     }
     return { loginResponse, claimsResponse };
   };

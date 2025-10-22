@@ -3,6 +3,7 @@ import { TextInput } from "../../../../components/Form/TextInput";
 import { Button } from "../../../../components/Form/Button";
 import type { GetListWarehouseListItemDto } from "../../types/GetListWarehouseListItemDto";
 import { useUpdateWarehouse } from "../../hooks/useUpdateWarehouse";
+import { useDeleteWarehouse } from "../../hooks/useDeleteWarehouse";
 
 interface WarehouseDetailModalProps {
   item: GetListWarehouseListItemDto;
@@ -19,6 +20,8 @@ export const WarehouseDetailModal: React.FC<WarehouseDetailModalProps> = ({
   });
   const { updateWarehouse, isLoading } = useUpdateWarehouse();
 
+  const { deleteWarehouse, isLoading: isLoadingDelete } = useDeleteWarehouse();
+
   const handleChange = (key: string, value: string | number) => {
     setEditedItem((prev) => ({ ...prev, [key]: value }));
   };
@@ -32,6 +35,14 @@ export const WarehouseDetailModal: React.FC<WarehouseDetailModalProps> = ({
     });
     console.log("Güncellendi:", editedItem);
     setIsEditing(false);
+  };
+
+  const handleDelete = async () => {
+    await deleteWarehouse({
+      id: item.id,
+    });
+    console.log("Silindi: ", editedItem);
+    window.location.reload();
   };
 
   return (
@@ -80,6 +91,12 @@ export const WarehouseDetailModal: React.FC<WarehouseDetailModalProps> = ({
       >
         {isLoading ? "Güncelleniyor..." : isEditing ? "Güncelle" : "Düzenle"}
       </Button>
+
+      {!isEditing && (
+        <Button variant="danger" onClick={handleDelete}>
+          {isLoadingDelete ? "Siliniyor..." : "Sil"}
+        </Button>
+      )}
     </div>
   );
 };

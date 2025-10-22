@@ -17,7 +17,7 @@ export function useCreateProductStock() {
       toast.success("Ürün Stoğu başarıyla oluşturuldu!");
       return response;
     } catch (err: any) {
-      toast.error("Ürün Stoğu oluşturulurken bir hata oluştu!");
+      toast.error(err?.data?.detail || "Bir hata oluştu");
       console.error("createProductStock error:", err);
       throw err;
     }

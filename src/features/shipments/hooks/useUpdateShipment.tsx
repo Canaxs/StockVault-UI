@@ -15,7 +15,7 @@ export function useUpdateShipment() {
       toast.success("Sevkiyat bilgisi başarıyla Güncellendi!");
       return response;
     } catch (err: any) {
-      toast.error("Sevkiyat bilgisi güncellenirken bir hata oluştu!");
+      toast.error(err?.data?.detail || "Bir hata oluştu");
       console.error("updateShipmenterror:", err);
       throw err;
     }

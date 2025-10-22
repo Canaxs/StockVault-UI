@@ -15,7 +15,7 @@ export function useUpdateCustomer() {
       toast.success("Müşteri bilgileri başarıyla Güncellendi!");
       return response;
     } catch (err: any) {
-      toast.error("Müşteri bilgileri güncellenirken bir hata oluştu!");
+      toast.error(err?.data?.detail || "Bir hata oluştu");
       console.error("updateCustomer error:", err);
       throw err;
     }

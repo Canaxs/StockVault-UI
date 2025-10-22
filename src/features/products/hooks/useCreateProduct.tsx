@@ -15,7 +15,7 @@ export function useCreateProduct() {
       toast.success("Ürün başarıyla oluşturuldu!");
       return response;
     } catch (err: any) {
-      toast.error("Ürün oluşturulurken bir hata oluştu!");
+      toast.error(err?.data?.detail || "Bir hata oluştu");
       console.error("createProduct error:", err);
       throw err;
     }

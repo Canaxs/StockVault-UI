@@ -13,7 +13,7 @@ export function useCreateUser() {
       toast.success("Kullanıcı başarıyla oluşturuldu!");
       return response;
     } catch (err: any) {
-      toast.error("Kullanıcı oluşturulurken bir hata oluştu!");
+      toast.error(err?.data?.detail || "Bir hata oluştu");
       console.error("createUser error:", err);
       throw err;
     }

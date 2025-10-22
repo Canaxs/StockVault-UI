@@ -15,7 +15,7 @@ export function useCreateWarehouse() {
       toast.success("Depo başarıyla oluşturuldu!");
       return response;
     } catch (err: any) {
-      toast.error("Depo oluşturulurken bir hata oluştu!");
+      toast.error(err?.data?.detail || "Bir hata oluştu");
       console.error("createWarehouse error:", err);
       throw err;
     }

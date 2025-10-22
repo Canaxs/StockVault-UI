@@ -15,7 +15,7 @@ export function useCreateCustomer() {
       toast.success("Müşteri başarıyla oluşturuldu!");
       return response;
     } catch (err: any) {
-      toast.error("Müşteri oluşturulurken bir hata oluştu!");
+      toast.error(err?.data?.detail || "Bir hata oluştu");
       console.error("createCustomer error:", err);
       throw err;
     }

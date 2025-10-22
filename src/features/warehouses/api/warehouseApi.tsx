@@ -1,6 +1,8 @@
 import { api } from "../../../api/api.tsx";
 import type { CreatedWarehouseResponse } from "../types/CreatedWarehouseResponse.tsx";
 import type { CreateWarehouseRequest } from "../types/CreateWarehouseRequest.tsx";
+import type { DeletedWarehouseResponse } from "../types/DeletedWarehouseResponse.tsx";
+import type { DeleteWarehouseRequest } from "../types/DeleteWarehouseRequest.tsx";
 import type { GetListProductByWarehouseIdRequest } from "../types/GetListProductByWarehouseIdRequest.tsx";
 import type { GetListProductByWarehouseIdResponse } from "../types/GetListProductByWarehouseIdResponse.tsx";
 import type { GetListShipmentByWarehouseIdRequest } from "../types/GetListShipmentByWarehouseIdRequest.tsx";
@@ -71,6 +73,15 @@ export const warehouseApi = api.injectEndpoints({
         body: request,
       }),
     }),
+    DeleteWarehouse: builder.mutation<
+      DeletedWarehouseResponse,
+      DeleteWarehouseRequest
+    >({
+      query: (request) => ({
+        url: `/Warehouse/${request.id}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
@@ -80,4 +91,5 @@ export const {
   useGetListProductByWarehouseIdQuery,
   useGetListShipmentByWarehouseIdQuery,
   useUpdateWarehouseMutation,
+  useDeleteWarehouseMutation,
 } = warehouseApi;

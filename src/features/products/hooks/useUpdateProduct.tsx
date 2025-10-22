@@ -15,7 +15,7 @@ export function useUpdateProduct() {
       toast.success("Ürün başarıyla Güncellendi!");
       return response;
     } catch (err: any) {
-      toast.error("Ürün güncellenirken bir hata oluştu!");
+      toast.error(err?.data?.detail || "Bir hata oluştu");
       console.error("updateProducterror:", err);
       throw err;
     }
