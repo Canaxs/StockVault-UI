@@ -56,7 +56,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
             label="Fiyat"
             value={editedItem.price}
             inputClassName="p-1"
-            onChange={(v) => handleChange("price", v)}
+            onChange={(v) => handleChange("price", Number(v))}
           />
         </>
       ) : (

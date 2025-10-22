@@ -3,7 +3,7 @@ import { PaginateTable } from "../../../../components/PaginateTable/PaginateTabl
 import { LayoutDashboard } from "../../../../layouts/LayoutDashboard/LayoutDashboard";
 import { ShipmentHeader } from "../../components/ShipmentHeader/ShipmentHeader";
 import { useGetListShipmentQuery } from "../../api/shipmentApi";
-import { Button } from "../../../../components/Form/Button";
+import { ShipmentDetailModal } from "../../components/ShipmentDetailModal/ShipmentDetailModal";
 
 const shipmentColumns = [
   { key: "id", label: "Id" },
@@ -45,29 +45,7 @@ export function ShipmentDashboard() {
             onPrevious={() => {
               if (response?.hasPrevious) setPage((prev) => prev - 1);
             }}
-            renderModalContent={(item) => (
-              <div className="flex flex-col gap-3 p-5 min-w-[300px]">
-                <h2 className="font-medium text-lg">Depo Detayı</h2>
-                <p>
-                  <strong>Ürün Adı:</strong> {item.productName}
-                </p>
-                <p>
-                  <strong>Depo Adı:</strong> {item.warehouseName}
-                </p>
-                <p>
-                  <strong>Miktar:</strong> {item.quantity}
-                </p>
-                <p>
-                  <strong>Sipariş Durumu:</strong> {item.deliveryStatus}
-                </p>
-                <Button
-                  variant="secondary"
-                  onClick={() => console.log(item.id)}
-                >
-                  Düzenle
-                </Button>
-              </div>
-            )}
+            renderModalContent={(item) => <ShipmentDetailModal item={item} />}
           />
         </div>
       </div>

@@ -1,10 +1,10 @@
-export type GetListShipmentListItemDto = {
+export type UpdatedShipmentResponse = {
   id: number;
   productId: number;
-  productName: string;
   warehouseId: number;
-  warehouseName: string;
   customerId: number;
   quantity: number;
   deliveryStatus: number;
+  notes: string;
+  updatedDate: Date;
 };

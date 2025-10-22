@@ -56,7 +56,7 @@ export const WarehouseDetailModal: React.FC<WarehouseDetailModalProps> = ({
             label="Kapasite"
             value={editedItem.maxCapacity}
             inputClassName="p-1"
-            onChange={(v) => handleChange("maxCapacity", v)}
+            onChange={(v) => handleChange("maxCapacity", Number(v))}
           />
         </>
       ) : (
