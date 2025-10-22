@@ -31,22 +31,28 @@ export function ProductActionStatCard() {
         Ürün Stok Durumu
       </p>
 
-      <div className="flex flex-col gap-3">
-        <TextInput
-          label="Ürün Numarası"
-          value={productId}
-          onChange={(val) => setProductId(parseInt(val))}
-          placeholder="Ürün Numarası giriniz..."
-          inputClassName="h-10 p-3 shadow-sm"
-        />
+      <div className="flex flex-col">
+        <div className="flex gap-3 w-full">
+          <div className="flex-1">
+            <TextInput
+              label="Ürün Numarası"
+              value={productId}
+              onChange={(val) => setProductId(parseInt(val))}
+              placeholder="Ürün Numarası giriniz..."
+              inputClassName="h-10 p-3 shadow-sm w-full"
+            />
+          </div>
 
-        <TextInput
-          label="Depo Numarası"
-          value={warehouseId}
-          onChange={(val) => setWarehouseId(parseInt(val))}
-          placeholder="Depo Numarası giriniz..."
-          inputClassName="h-10 p-3 shadow-sm"
-        />
+          <div className="flex-1">
+            <TextInput
+              label="Depo Numarası"
+              value={warehouseId}
+              onChange={(val) => setWarehouseId(parseInt(val))}
+              placeholder="Depo Numarası giriniz..."
+              inputClassName="h-10 p-3 shadow-sm w-full"
+            />
+          </div>
+        </div>
 
         <Button
           onClick={handleSubmit}
@@ -63,7 +69,7 @@ export function ProductActionStatCard() {
             Ürün Stok Bilgisi
           </h2>
 
-          {response && (
+          {response ? (
             <div className="flex flex-col divide-y divide-gray-200">
               <button
                 className="flex justify-between items-center w-full text-left font-medium text-gray-700 hover:text-gray-900 transition-colors py-2"
@@ -97,6 +103,10 @@ export function ProductActionStatCard() {
                 </div>
               )}
             </div>
+          ) : (
+            <p className="text-gray-400 text-sm mt-3">
+              Gösterilecek veri bulunamadı.
+            </p>
           )}
         </div>
       </Modal>

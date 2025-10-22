@@ -136,7 +136,7 @@ export function ProductDashboard() {
             onSubmit={(value) => setCustomerProductId(parseInt(value))}
           />
         </div>
-        <div className="col-span-5 md:col-span-4  lg:col-span-2 xl:col-span-1 gap-3">
+        <div className="col-span-5 md:col-span-4  lg:col-span-2 xl:col-span-1 flex flex-col gap-3">
           <ActionStatCard
             title="Sipariş Durumu"
             gradient="from-orange-400 to-red-800"
