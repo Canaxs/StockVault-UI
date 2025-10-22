@@ -1,6 +1,8 @@
 import { api } from "../../../api/api.tsx";
 import type { CreatedProductResponse } from "../types/CreatedProductResponse.tsx";
 import type { CreateProductRequest } from "../types/CreateProductRequest.tsx";
+import type { GetListByDynamicNameRequest } from "../types/GetListByDynamicNameRequest.tsx";
+import type { GetListByDynamicNameResponse } from "../types/GetListByDynamicNameResponse.tsx";
 import type { GetListCustomerByProductIdRequest } from "../types/GetListCustomerByProductIdRequest.tsx";
 import type { GetListCustomerByProductIdResponse } from "../types/GetListCustomerByProductIdResponse.tsx";
 import type { GetListProductRequest } from "../types/GetListProductRequest.tsx";
@@ -105,6 +107,23 @@ export const productApi = api.injectEndpoints({
         body: request,
       }),
     }),
+    GetListByDynamicName: builder.query<
+      GetListByDynamicNameResponse,
+      GetListByDynamicNameRequest
+    >({
+      query: (request) => ({
+        url: `/Product/DynamicName`,
+        method: "GET",
+        params: {
+          PageIndex: request.PageIndex,
+          PageSize: request.PageSize,
+          fieldValue: request.FieldValue,
+          fieldOperator: request.FieldOperator,
+          sortField: request.SortField,
+          sortDir: request.SortDir,
+        },
+      }),
+    }),
   }),
 });
 
@@ -116,4 +135,5 @@ export const {
   useGetListShipmentByProductIdQuery,
   useGetListCustomerByProductIdQuery,
   useUpdateProductMutation,
+  useGetListByDynamicNameQuery,
 } = productApi;

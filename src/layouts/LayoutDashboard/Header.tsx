@@ -4,8 +4,25 @@ import type { RootState } from "../../app/store";
 import { HamburgerMenu } from "./HamburgerMenu";
 import { useEffect, useRef, useState } from "react";
 import { logout } from "../../features/auth/slices/authSlice";
+import { SearchInput } from "../../components/SearchInput/SearchInput";
 
-export const Header = () => {
+interface HeaderProps {
+  searchValue?: string;
+  searchPlaceHolder?: string;
+  searchOnChange?: (val: string) => void;
+  searchResults?: any[];
+  searchRenderResults?: (item: any) => React.ReactNode;
+  searchOnSelect?: (item: any) => void;
+}
+
+export const Header: React.FC<HeaderProps> = ({
+  searchValue,
+  searchPlaceHolder,
+  searchOnChange,
+  searchResults,
+  searchRenderResults,
+  searchOnSelect,
+}) => {
   const username = useSelector((state: RootState) => state.auth.username);
   const roles = useSelector((state: RootState) => state.auth.roles);
 
@@ -35,15 +52,29 @@ export const Header = () => {
 
   return (
     <div className="bg-[#f7f7f7] rounded-xl w-full h-20">
-      <div className="flex justify-between h-full p-3">
+      <div className="flex justify-between items-center h-full p-3">
         <div>
           <HamburgerMenu />
         </div>
+        <div>
+          {searchValue !== undefined && searchOnChange && (
+            <SearchInput
+              value={searchValue}
+              placeholder={searchPlaceHolder}
+              onChange={searchOnChange}
+              results={searchResults || []}
+              renderResult={
+                searchRenderResults || ((item) => <div>{item.name}</div>)
+              }
+              onSelect={searchOnSelect}
+            />
+          )}
+        </div>
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-white flex items-center justify-center">
+          <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-white flex items-center justify-center max-sm:hidden">
             <Mail size={18} />
           </div>
-          <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-white flex items-center justify-center">
+          <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-white flex items-center justify-center max-sm:hidden">
             <Bell size={18} />
           </div>
           <div className="relative" ref={profileMenuRef}>

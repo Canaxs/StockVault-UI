@@ -2,6 +2,7 @@ import { useState } from "react";
 import { PaginateTable } from "../../../../components/PaginateTable/PaginateTable";
 import { LayoutDashboard } from "../../../../layouts/LayoutDashboard/LayoutDashboard";
 import {
+  useGetListByDynamicNameQuery,
   useGetListCustomerByProductIdQuery,
   useGetListProductQuery,
   useGetListShipmentByProductIdQuery,
@@ -14,6 +15,8 @@ import type { GetListShipmentByProductIdListItemDto } from "../../types/GetListS
 import type { GetListCustomerByProductIdListItemDto } from "../../types/GetListCustomerByProductIdListItemDto";
 import { ProductDetailModal } from "../../components/ProductDetailModal/ProductDetailModal";
 import { ProductActionStatCard } from "../../components/ProductActionStatCard/ProductActionStatCard";
+import Modal from "react-responsive-modal";
+import type { GetListByDynamicNameListItemDto } from "../../types/GetListByDynamicNameListItemDto";
 
 const productColumns = [
   { key: "id", label: "Id" },
@@ -61,9 +64,14 @@ const customerByProductIdColumns: {
 ];
 
 export function ProductDashboard() {
+  const [searchValue, setSearchValue] = useState<string>("");
   const [warehouseProductId, setWarehouseProductId] = useState<number>(0);
   const [shipmentProductId, setShipmentProductId] = useState<number>(0);
   const [customerProductId, setCustomerProductId] = useState<number>(0);
+
+  const [searchSelectItem, setSearchSelectItem] =
+    useState<GetListByDynamicNameListItemDto>();
+  const [searchModal, setSearchModal] = useState(false);
 
   const [page, setPage] = useState(0);
   const pageSize = 10;
@@ -92,6 +100,20 @@ export function ProductDashboard() {
     PageIndex: 0,
     PageSize: 20,
   });
+
+  const { data: searchData } = useGetListByDynamicNameQuery(
+    {
+      PageIndex: 0,
+      PageSize: 10,
+      FieldValue: searchValue,
+      FieldOperator: "startswith",
+      SortDir: "asc",
+      SortField: "Name",
+    },
+    {
+      skip: !searchValue,
+    }
+  );
 
   const content = (
     <div className="flex flex-col p-7">
@@ -153,5 +175,42 @@ export function ProductDashboard() {
     </div>
   );
 
-  return <LayoutDashboard children={content} />;
+  return (
+    <>
+      <LayoutDashboard
+        children={content}
+        searchValue={searchValue}
+        searchPlaceHolder={"Ürün Ara..."}
+        searchOnChange={(value) => setSearchValue(value)}
+        searchResults={searchValue ? searchData?.items || [] : []}
+        searchRenderResults={(item) => <div>{item.name}</div>}
+        searchOnSelect={(item) => {
+          setSearchSelectItem(item);
+          setSearchModal(true);
+          setSearchValue("");
+        }}
+      />
+      {searchModal && (
+        <Modal open={searchModal} onClose={() => setSearchModal(false)} center>
+          <div className="p-4">
+            <h2 className="text-lg font-semibold">Ürün Detayı</h2>
+            <div className="mt-2 text-sm text-gray-600 bg-gray-50 p-3 rounded-lg">
+              <p>
+                <strong>Ürün Adı: </strong>
+                {searchSelectItem?.name}
+              </p>
+              <p className="line-clamp-1">
+                <strong>Ürün Açıklaması: </strong>
+                {searchSelectItem?.description}
+              </p>
+              <p>
+                <strong>Ürün Fiyatı: </strong>
+                {searchSelectItem?.price}
+              </p>
+            </div>
+          </div>
+        </Modal>
+      )}
+    </>
+  );
 }
