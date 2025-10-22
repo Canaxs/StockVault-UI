@@ -3,6 +3,7 @@ import { TextInput } from "../../../../components/Form/TextInput";
 import { Button } from "../../../../components/Form/Button";
 import type { GetListProductListItemDto } from "../../types/GetListProductListItemDto";
 import { useUpdateProduct } from "../../hooks/useUpdateProduct";
+import { useDeleteProduct } from "../../hooks/useDeleteProduct";
 
 interface ProductDetailModalProps {
   item: GetListProductListItemDto;
@@ -19,6 +20,8 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
   });
   const { updateProduct, isLoading } = useUpdateProduct();
 
+  const { deleteProduct, isLoading: isLoadingDelete } = useDeleteProduct();
+
   const handleChange = (key: string, value: string | number) => {
     setEditedItem((prev) => ({ ...prev, [key]: value }));
   };
@@ -32,6 +35,14 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
     });
     console.log("Güncellendi:", editedItem);
     setIsEditing(false);
+  };
+
+  const handleDelete = async () => {
+    await deleteProduct({
+      id: item.id,
+    });
+    console.log("Silindi: ", editedItem);
+    window.location.reload();
   };
 
   return (
@@ -80,6 +91,12 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
       >
         {isLoading ? "Güncelleniyor..." : isEditing ? "Güncelle" : "Düzenle"}
       </Button>
+
+      {!isEditing && (
+        <Button variant="danger" onClick={handleDelete}>
+          {isLoadingDelete ? "Siliniyor..." : "Sil"}
+        </Button>
+      )}
     </div>
   );
 };

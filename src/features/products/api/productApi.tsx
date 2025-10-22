@@ -1,6 +1,8 @@
 import { api } from "../../../api/api.tsx";
 import type { CreatedProductResponse } from "../types/CreatedProductResponse.tsx";
 import type { CreateProductRequest } from "../types/CreateProductRequest.tsx";
+import type { DeletedProductResponse } from "../types/DeletedProductResponse.tsx";
+import type { DeleteProductRequest } from "../types/DeleteProductRequest.tsx";
 import type { GetListByDynamicNameRequest } from "../types/GetListByDynamicNameRequest.tsx";
 import type { GetListByDynamicNameResponse } from "../types/GetListByDynamicNameResponse.tsx";
 import type { GetListCustomerByProductIdRequest } from "../types/GetListCustomerByProductIdRequest.tsx";
@@ -124,6 +126,15 @@ export const productApi = api.injectEndpoints({
         },
       }),
     }),
+    DeleteProduct: builder.mutation<
+      DeletedProductResponse,
+      DeleteProductRequest
+    >({
+      query: (request) => ({
+        url: `/Product/${request.id}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
@@ -136,4 +147,5 @@ export const {
   useGetListCustomerByProductIdQuery,
   useUpdateProductMutation,
   useGetListByDynamicNameQuery,
+  useDeleteProductMutation,
 } = productApi;
