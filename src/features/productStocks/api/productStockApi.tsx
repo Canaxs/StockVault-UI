@@ -3,6 +3,8 @@ import type { CreatedProductStockResponse } from "../types/CreatedProductStockRe
 import type { CreateProductStockRequest } from "../types/CreateProductStockRequest.tsx";
 import type { GetProductStockByProductIdAndWarehouseIdRequest } from "../types/GetProductStockByProductIdAndWarehouseIdRequest.tsx";
 import type { GetProductStockByProductIdAndWarehouseIdResponse } from "../types/GetProductStockByProductIdAndWarehouseIdResponse.tsx";
+import type { UpdatedProductStockResponse } from "../types/UpdatedProductStockResponse.tsx";
+import type { UpdateProductStockRequest } from "../types/UpdateProductStockRequest.tsx";
 
 export const productStockApi = api.injectEndpoints({
   endpoints: (builder) => ({
@@ -25,6 +27,16 @@ export const productStockApi = api.injectEndpoints({
         method: "GET",
       }),
     }),
+    UpdateProductStock: builder.mutation<
+      UpdatedProductStockResponse,
+      UpdateProductStockRequest
+    >({
+      query: (request) => ({
+        url: "/ProductStock",
+        method: "PUT",
+        body: request,
+      }),
+    }),
   }),
 });
 
@@ -32,4 +44,5 @@ export const {
   useAddProductStockMutation,
   useGetProductStockByProductIdAndWarehouseIdQuery,
   useLazyGetProductStockByProductIdAndWarehouseIdQuery,
+  useUpdateProductStockMutation,
 } = productStockApi;
